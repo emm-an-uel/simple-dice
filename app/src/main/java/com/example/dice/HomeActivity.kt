@@ -24,7 +24,7 @@ class HomeActivity : AppCompatActivity() {
         numberPicker = findViewById(R.id.numberPicker)
 
         numberPicker.minValue = 1
-        numberPicker.maxValue = 6
+        numberPicker.maxValue = 5
 
         btnConfirm.setOnClickListener {
             startDiceActivity()
