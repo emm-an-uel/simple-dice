@@ -5,20 +5,26 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.NumberPicker
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat.startActivity
+import androidx.core.view.isNotEmpty
 import com.google.android.material.snackbar.Snackbar
 
 class HomeActivity : AppCompatActivity() {
 
     lateinit var btnConfirm: Button
-    lateinit var etNumDice: EditText
+    lateinit var numberPicker: NumberPicker
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
         btnConfirm = findViewById(R.id.btnConfirm)
-        etNumDice = findViewById(R.id.etNumDice)
+        numberPicker = findViewById(R.id.numberPicker)
+
+        numberPicker.minValue = 1
+        numberPicker.maxValue = 6
 
         btnConfirm.setOnClickListener {
             startDiceActivity()
@@ -26,24 +32,14 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun startDiceActivity() {
-        var numDice = 1
-        if (etNumDice.text.isNotEmpty()) {
-            numDice = etNumDice.text.toString().toInt()
-        }
+        val numDice = numberPicker.value
 
-        if (numDice < 6) { // max of 5 dice
-            val bundle = Bundle()
-            bundle.putInt("numDice", numDice)
+        val bundle = Bundle()
+        bundle.putInt("numDice", numDice)
 
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtras(bundle)
-            startActivity(intent)
-            finish()
-
-        } else {
-            val view = findViewById<ConstraintLayout>(R.id.layout)
-            val snackBar = Snackbar.make(view, "Max. 5 Dice", Snackbar.LENGTH_LONG)
-            snackBar.show()
-        }
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtras(bundle)
+        startActivity(intent)
+        finish()
     }
 }
