@@ -40,7 +40,7 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         } else {
             val view = findViewById<ConstraintLayout>(R.id.layout)
-            val snackBar = Snackbar.make(view, "Max 5 dice", Snackbar.LENGTH_LONG)
+            val snackBar = Snackbar.make(view, "Max. 5 Dice", Snackbar.LENGTH_LONG)
             snackBar.show()
         }
     }

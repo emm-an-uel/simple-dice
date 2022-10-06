@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
             )
 
             tvDie.textAlignment = View.TEXT_ALIGNMENT_CENTER
+            tvDie.textSize = 30F
 
             tvDie.id = View.generateViewId()
             tvDie.text = "die${i+1}"
@@ -67,5 +68,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun rollDice() {
+        var diceSum = 0
+
+        for (id in idList) {
+            val tvDie = findViewById<TextView>(id)
+            val num = (1..6).random()
+
+            tvDie.text = num.toString()
+            diceSum += num
+        }
+
+        tvTotal.text = diceSum.toString()
     }
 }
