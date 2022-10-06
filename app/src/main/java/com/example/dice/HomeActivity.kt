@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.snackbar.Snackbar
 
 class HomeActivity : AppCompatActivity() {
@@ -38,7 +39,8 @@ class HomeActivity : AppCompatActivity() {
             intent.putExtras(bundle)
             startActivity(intent)
         } else {
-            val snackBar = Snackbar.make(it, "Max 5 dice", Snackbar.LENGTH_LONG)
+            val view = findViewById<ConstraintLayout>(R.id.layout)
+            val snackBar = Snackbar.make(view, "Max 5 dice", Snackbar.LENGTH_LONG)
             snackBar.show()
         }
     }
