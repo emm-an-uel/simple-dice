@@ -1,5 +1,6 @@
 package com.example.dice
 
+import android.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -45,6 +46,14 @@ class MainActivity : AppCompatActivity() {
         var i = 0
         while (i < numDice) {
             val tvDie = TextView(this)
+
+            tvDie.layoutParams = TableRow.LayoutParams(
+                TableRow.LayoutParams.WRAP_CONTENT,
+                TableRow.LayoutParams.WRAP_CONTENT,
+                1f
+            )
+
+            tvDie.textAlignment = View.TEXT_ALIGNMENT_CENTER
 
             tvDie.id = View.generateViewId()
             tvDie.text = "die${i+1}"
