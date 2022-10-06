@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import com.google.android.material.snackbar.Snackbar
 
 class HomeActivity : AppCompatActivity() {
 
@@ -29,11 +30,16 @@ class HomeActivity : AppCompatActivity() {
             numDice = etNumDice.text.toString().toInt()
         }
 
-        val bundle = Bundle()
-        bundle.putInt("numDice", numDice)
+        if (numDice < 6) { // max of 5 dice
+            val bundle = Bundle()
+            bundle.putInt("numDice", numDice)
 
-        val intent = Intent(this, MainActivity::class.java)
-        intent.putExtras(bundle)
-        startActivity(intent)
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtras(bundle)
+            startActivity(intent)
+        } else {
+            val snackBar = Snackbar.make(it, "Max 5 dice", Snackbar.LENGTH_LONG)
+            snackBar.show()
+        }
     }
 }
