@@ -1,6 +1,7 @@
 package com.example.dice
 
 import android.app.ActionBar
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var tableLayout: TableLayout
     lateinit var tvTotal: TextView
     lateinit var btnRoll: Button
+    lateinit var btnHome: Button
     lateinit var idList: ArrayList<Int>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         tableLayout = findViewById(R.id.tableLayout)
         tvTotal = findViewById(R.id.diceTotal)
         btnRoll = findViewById(R.id.btnRoll)
+        btnHome = findViewById(R.id.btnHome)
         idList = arrayListOf()
 
         createDice()
@@ -37,6 +40,10 @@ class MainActivity : AppCompatActivity() {
 
         btnRoll.setOnClickListener {
             rollDice()
+        }
+
+        btnHome.setOnClickListener {
+            goHome()
         }
     }
 
@@ -79,5 +86,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         tvTotal.text = diceSum.toString()
+    }
+
+    private fun goHome() {
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

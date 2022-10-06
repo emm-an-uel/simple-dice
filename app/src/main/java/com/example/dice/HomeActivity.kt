@@ -38,6 +38,8 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtras(bundle)
             startActivity(intent)
+            finish()
+
         } else {
             val view = findViewById<ConstraintLayout>(R.id.layout)
             val snackBar = Snackbar.make(view, "Max. 5 Dice", Snackbar.LENGTH_LONG)
