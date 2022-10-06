@@ -2,26 +2,36 @@ package com.example.dice
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
+import android.widget.TableLayout
+import android.widget.TableRow
 import android.widget.TextView
 import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var tvDie1: TextView
-    lateinit var tvDie2: TextView
+    var numDice = 1
+    lateinit var tableLayout: TableLayout
     lateinit var tvTotal: TextView
     lateinit var btnRoll: Button
+    lateinit var idList: ArrayList<Int>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        tvDie1 = findViewById(R.id.tvDie1)
-        tvDie2 = findViewById(R.id.tvDie2)
+        val bundle = intent.extras
+        if (bundle != null) {
+            numDice = bundle.getInt("numDice")
+        }
+
+        tableLayout = findViewById(R.id.tableLayout)
         tvTotal = findViewById(R.id.diceTotal)
         btnRoll = findViewById(R.id.btnRoll)
+        idList = arrayListOf()
 
+        createDice()
         rollDice()
 
         btnRoll.setOnClickListener {
@@ -29,13 +39,24 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun rollDice() {
-        val num1 = (1..6).random()
-        val num2 = (1..6).random()
-        tvDie1.text = num1.toString()
-        tvDie2.text = num2.toString()
+    private fun createDice() {
+        val tableRow = TableRow(this)
 
-        val numTotal = num1 + num2
-        tvTotal.text = numTotal.toString()
+        var i = 0
+        while (i < numDice) {
+            val tvDie = TextView(this)
+
+            tvDie.id = View.generateViewId()
+            tvDie.text = "die${i+1}"
+            idList.add(tvDie.id) // adds id to list of tvDie id's
+
+            tableRow.addView(tvDie)
+            i++
+        }
+
+        tableLayout.addView(tableRow)
+    }
+
+    private fun rollDice() {
     }
 }
